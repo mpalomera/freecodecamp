@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/api",
+      "lambdaFunction": "timestamp8e3e2b2d",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/api"
+    }
+  ],
+  "resourceName": "timestamp",
+  "apiName": "timestamp",
+  "functionArns": [
+    {
+      "lambdaFunction": "timestamp8e3e2b2d"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-timestamp-dev-202526-authRole",
+    "unAuthRoleName": "amplify-timestamp-dev-202526-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "timestamp8e3e2b2d",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
