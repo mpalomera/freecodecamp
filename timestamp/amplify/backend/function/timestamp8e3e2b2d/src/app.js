@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
 
 const getDate = (newDate) => {
   const unix = Math.round(newDate.getTime());
-  const utc = newDate.toString();
+  const utc = newDate.toUTCString();
   return {unix, utc};
 }
 
