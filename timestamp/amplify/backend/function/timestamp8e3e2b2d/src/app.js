@@ -39,6 +39,13 @@ function convertToInt(value) {
   }
 }
 
+app.get('/api/whoami', function(req, res) {
+  const ipaddress = req.headers['x-forwarded-for'];
+  const language = req.headers['accept-language'];
+  const software = req.headers['user-agent'];
+  res.json({ipaddress, language, software});
+})
+
 app.get('/api', function(req, res) {
   const today = new Date();
   res.json(getDate(today));
@@ -60,7 +67,8 @@ app.get('/api/:date', function(req, res) {
 });
 
 
-app.listen(3000, function() {
+
+app.listen(8080, function() {
     console.log("App started")
 });
 

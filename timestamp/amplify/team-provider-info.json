@@ -15,7 +15,7 @@
       "function": {
         "timestamp8e3e2b2d": {
           "deploymentBucketName": "amplify-timestamp-dev-202526-deployment",
-          "s3Key": "amplify-builds/timestamp8e3e2b2d-6a626970433776653066-build.zip"
+          "s3Key": "amplify-builds/timestamp8e3e2b2d-4d413339317852666a39-build.zip"
         }
       }
     }
