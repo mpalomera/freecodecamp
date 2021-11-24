@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/api",
+      "lambdaFunction": "urlshortener",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/api"
+    }
+  ],
+  "resourceName": "resturlshortener",
+  "apiName": "resturlshortener",
+  "functionArns": [
+    {
+      "lambdaFunction": "urlshortener"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-urlshortener-dev-174218-authRole",
+    "unAuthRoleName": "amplify-urlshortener-dev-174218-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "urlshortener",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

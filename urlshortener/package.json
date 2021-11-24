@@ -1,0 +1,11 @@
+{
+  "name": "urlshortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "updateAppsyncOperations": "amplify api gql-compile && amplify codegen && babel src/graphql --config-file ./babel.config.json -d ./amplify/backend/function/urlshortenershorturlgraphl/opt/graphql/"
+  },
+  "author": "",
+  "license": "ISC"
+}
