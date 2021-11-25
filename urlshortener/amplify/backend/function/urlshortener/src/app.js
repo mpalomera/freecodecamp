@@ -18,6 +18,7 @@ const bodyParser = require('body-parser');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 const { v4: uuidv4 } = require('uuid');
 const get = require('lodash/get');
+const URL = require("url").URL;
 
 const appsyncUrl = process.env.API_URLSHORTENER_GRAPHQLAPIENDPOINTOUTPUT;
 const apiKey = process.env.API_URLSHORTENER_GRAPHQLAPIKEYOUTPUT;
@@ -30,6 +31,7 @@ const { listShorturls } = require('/opt/graphql/queries');
 // declare a new express app
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
@@ -39,6 +41,20 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+
+const isValidHttpUrl = (string) => {
+  let url;
+
+  try {
+    url = new URL(string);
+  }
+  catch (_) {
+    return false;
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+};
 
 const createShortUrl = (originalurl) => {
   const id = uuidv4();
@@ -52,30 +68,37 @@ const createShortUrl = (originalurl) => {
     },
     appsyncUrl,
     apiKey
-  )
+  );
 };
 
 const getOrinalUrl = async(shortUrl) => {
   return request({
       query: listShorturls,
-      operationName: 'ListShorturls',
       variables: {
         filter: { shorturl: { eq: shortUrl } },
-        limit: 1
       },
     },
     appsyncUrl,
     apiKey
   );
-}
+};
 
-app.post('/api/shorturl', async function(req, res) {
-  const originalUrl = req.body.url;
-  const result = await createShortUrl(originalUrl);
-  res.json({ original_url: originalUrl, short_url: result.data.shorturl });
+app.get('/api', function(req, res) {
+  res.sendFile(process.cwd() + '/views/index.html');
 });
 
-app.get('/api/shorturl/:shorturl', async function(req, res) {
+app.post('/api/api/shorturl', async function(req, res) {
+  const originalUrl = req.body.url;
+  if (isValidHttpUrl(originalUrl)) {
+    const result = await createShortUrl(originalUrl);
+    const shorturl = get(result, 'data.createShorturl.shorturl', null);
+    const response = { original_url: originalUrl, short_url: shorturl };
+    return res.json(response);
+  }
+  res.json({ error: 'invalid url' });
+});
+
+app.get('/api/api/shorturl/:shorturl', async function(req, res) {
   const shorturl = req.params.shorturl;
   const result = await getOrinalUrl(shorturl);
   const originalUrl = get(result, 'data.listShorturls.items[0].originalurl', null);
