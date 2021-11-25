@@ -12,7 +12,7 @@ postData = {
 
 //the config for our HTTP POST request
 postConfig = {
-    url: 'https://rvtc3gfly7.execute-api.us-east-1.amazonaws.com/dev/api/shorturl',
+    url: 'https://rvtc3gfly7.execute-api.us-east-1.amazonaws.com/dev/api/api/shorturl',
     body: postData,
     json: true
 };
