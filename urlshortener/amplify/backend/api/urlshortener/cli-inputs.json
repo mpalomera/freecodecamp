@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    },
+    "conflictResolution": {},
+    "apiName": "urlshortener",
+    "gqlSchemaPath": "/home/ubuntu/environment/freecodecamp/urlshortener/amplify/backend/api/urlshortener/schema.graphql"
+  }
+}

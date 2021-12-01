@@ -1,5 +1,19 @@
-type Shorturl @model {
+type Shorturl @model @auth(rules: [{allow: public}]) {
   id: ID!
   shorturl: String!
   originalurl: String!
+}
+
+type User @model @auth(rules: [{allow: public}]){
+  id: ID!
+  username: String!
+  logs: [Exercise] @hasMany
+}
+
+type Exercise @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  description: String
+  duration: Int
+  date: AWSDate
+  user: User @belongsTo
 }

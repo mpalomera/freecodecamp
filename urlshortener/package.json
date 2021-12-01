@@ -7,5 +7,10 @@
     "updateAppsyncOperations": "amplify api gql-compile && amplify codegen && babel src/graphql --config-file ./babel.config.json -d ./amplify/backend/function/urlshortenershorturlgraphl/opt/graphql/"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4"
+  }
 }

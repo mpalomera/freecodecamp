@@ -1,0 +1,5 @@
+type Shorturl @model {
+  id: ID!
+  shorturl: String!
+  originalurl: String!
+}

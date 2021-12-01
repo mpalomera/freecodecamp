@@ -15,11 +15,11 @@
       "function": {
         "urlshortenershorturlgraphl": {
           "deploymentBucketName": "amplify-urlshortener-dev-174218-deployment",
-          "s3Key": "amplify-builds/urlshortenershorturlgraphl-LambdaLayerVersion90e29347-build.zip"
+          "s3Key": "amplify-builds/urlshortenershorturlgraphl-LambdaLayerVersioneca9ca2c-build.zip"
         },
         "urlshortener": {
           "deploymentBucketName": "amplify-urlshortener-dev-174218-deployment",
-          "s3Key": "amplify-builds/urlshortener-2f5675542f72636e3843-build.zip"
+          "s3Key": "amplify-builds/urlshortener-624e3177672b4d4b2b2f-build.zip"
         }
       }
     }

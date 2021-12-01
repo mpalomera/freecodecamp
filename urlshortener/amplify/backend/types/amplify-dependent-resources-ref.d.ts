@@ -1,6 +1,7 @@
 export type AmplifyDependentResourcesAttributes = {
     "api": {
         "urlshortener": {
+            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         },
