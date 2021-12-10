@@ -31,6 +31,10 @@
     "functionurlshortenershorturlgraphlArn": {
       "Type": "String",
       "Default": "functionurlshortenershorturlgraphlArn"
+    },
+    "storagefilesBucketName": {
+      "Type": "String",
+      "Default": "storagefilesBucketName"
     }
   },
   "Conditions": {
@@ -94,6 +98,9 @@
             },
             "API_URLSHORTENER_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apiurlshortenerGraphQLAPIKeyOutput"
+            },
+            "STORAGE_FILES_BUCKETNAME": {
+              "Ref": "storagefilesBucketName"
             }
           }
         },
@@ -272,6 +279,45 @@
                         "Ref": "apiurlshortenerGraphQLAPIIdOutput"
                       },
                       "/types/Subscription/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagefilesBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagefilesBucketName"
+                      },
+                      "/*"
                     ]
                   ]
                 }

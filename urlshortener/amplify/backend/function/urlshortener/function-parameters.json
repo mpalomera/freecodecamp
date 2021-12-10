@@ -15,6 +15,14 @@
         "Mutation",
         "Subscription"
       ]
+    },
+    "storage": {
+      "files": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
     }
   }
 }

@@ -19,8 +19,12 @@
         },
         "urlshortener": {
           "deploymentBucketName": "amplify-urlshortener-dev-174218-deployment",
-          "s3Key": "amplify-builds/urlshortener-624e3177672b4d4b2b2f-build.zip"
+          "s3Key": "amplify-builds/urlshortener-726c4568397353477068-build.zip"
         }
+      },
+      "auth": {
+        "urlshortenera575f4c7": {},
+        "true": {}
       }
     }
   }

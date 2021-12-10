@@ -1,0 +1,14 @@
+{
+  "resourceName": "files",
+  "policyUUID": "7899f854",
+  "bucketName": "urlshortenerfiles",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -4,6 +4,7 @@
 	API_URLSHORTENER_GRAPHQLAPIKEYOUTPUT
 	ENV
 	REGION
+	STORAGE_FILES_BUCKETNAME
 Amplify Params - DO NOT EDIT */
 /*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
@@ -18,26 +19,27 @@ const bodyParser = require('body-parser');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 const exercisetracker = require('./routes/exercisetracker');
 const shorturl = require('./routes/shorturl');
+const fileupload = require('./routes/fileupload');
 
 // declare a new express app
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "*");
-  next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    next();
 });
 
 
-
+app.use('/fileupload', fileupload);
 app.use('/exercisetracker', exercisetracker);
 app.use('/api', shorturl);
 app.listen(3000, function() {
-  console.log("App started");
+    console.log("App started");
 });
 
 // Export the app object. When executing the application local this does nothing. However,

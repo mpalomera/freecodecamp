@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>File Metadata</title>
+    <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #222;
+            background-color: #ECF0F1;
+            text-align: center;
+        }
+
+        .container {
+            padding: 0;
+            margin-top: 40px;
+        }
+
+        .footer {
+            margin-top: 60px;
+        }
+
+        a {
+            color: #2574A9;
+        }
+
+        input {
+            display: block;
+            position: relative;
+            margin: 10px auto;
+        }
+
+        input#button {
+            width: 230px;
+        }
+
+        .view {
+            position: relative;
+            margin: auto;
+            margin-top: 40px;
+            border: 1px solid #aaa;
+            padding: 20px;
+            width: 60%;
+            min-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>API Project: File Metadata Microservice</h2>
+        <h3>Usage:</h3>
+        <p>
+            Please Upload a File ...
+        </p>
+        <div class="view">
+            <h4 id="output"></h4>
+            <form id="submitForm">
+                <input id="inputfield" type="file" name="upfile">
+                <input id="button" type="submit" value="Upload">
+            </form>
+            <script>
+                const fileInput = document.getElementById('inputfield');
+                // This is for storing the base64 strings
+                const myFiles = {};
+                // if you expect files by default, make this disabled
+                // we will wait until the last file being processed
+
+                fileInput.addEventListener('change', async (event) => {
+                    const files = event.srcElement.files;
+                    myFiles.name = files[0].name;
+                    myFiles.size = files[0].size;
+                    myFiles.mimetype = files[0].type;
+
+                    await new Promise((resolve, reject) => {
+                        const file = files[0];
+                        const reader = new FileReader();
+                        reader.readAsBinaryString(file);
+
+                        reader.onload = function(event) {
+                            // handle reader success
+                            myFiles.data = btoa(event.target.result);
+                            resolve();
+                        };
+
+                        reader.onerror = function() {
+                            console.log("couldn't read the file");
+                            reject();
+                        };
+                    });
+                    console.log(myFiles);
+                });
+
+                const formElement = document.getElementById('submitForm');
+                const handleForm = async (event) => {
+                    event.preventDefault();
+                    fetch('https://rvtc3gfly7.execute-api.us-east-1.amazonaws.com/dev/fileupload/api/uploadfile', {
+                            method: 'POST',
+                            body: JSON.stringify(myFiles),
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Accept: 'application/json'
+                            },
+                        })
+                        .then(r => r.json())
+                        .then(res => {
+                            document.getElementsByTagName('body')[0].innerHTML = '<pre style="word-wrap: break-word; white-space: pre-wrap;">' + JSON.stringify(res) + '</pre>';
+                        });
+                };
+                formElement.addEventListener('submit', handleForm);
+            </script>
+        </div>
+    </div>
+    <div class="footer">
+        <p>
+            by
+            <a href="https://www.freecodecamp.org/">freeCodeCamp</a>
+        </p>
+    </div>
+</body>
+
+
+</html>

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "paths": {
+    "/api": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "urlshortener"
+    },
+    "/exercisetracker": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "urlshortener"
+    },
+    "/fileupload": {
+      "name": "/fileupload",
+      "lambdaFunction": "urlshortener",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
